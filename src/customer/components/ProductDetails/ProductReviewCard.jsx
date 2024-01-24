@@ -4,7 +4,7 @@ import React from "react";
 const ProductReviewCard = () => {
   return (
     <div>
-      <Grid container spaacing={2} gap={3}>
+      <Grid container spaacing={3} gap={3} className="">
         <Grid item xs={1}>
           <Box>
             <Avatar

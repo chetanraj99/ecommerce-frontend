@@ -205,8 +205,6 @@ export default function Navigation() {
                     <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
                     <MenuItem
                       onClick={() => {
-                        handleCloseUserMenu();
-                        setOpen(false);
                         navigate("/account/order");
                       }}
                     >
