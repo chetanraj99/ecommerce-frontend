@@ -32,6 +32,7 @@ export default function Navigation() {
   const handleCategoryClick = (category, section, item, close) => {
     navigate(`/${category.id}/${section.id}/${item.name}`);
     close();
+    setOpen(false);
   };
 
   return (
@@ -144,13 +145,20 @@ export default function Navigation() {
                               className="mt-6 flex flex-col space-y-6"
                             >
                               {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 block p-2 text-gray-500"
+                                <li key={item.name} className="flex">
+                                  <p
+                                    onClick={() =>
+                                      handleCategoryClick(
+                                        category,
+                                        section,
+                                        item,
+                                        close
+                                      )
+                                    }
+                                    className="cursor-pointer hover:text-gray-800"
                                   >
                                     {item.name}
-                                  </a>
+                                  </p>
                                 </li>
                               ))}
                             </ul>
@@ -174,37 +182,38 @@ export default function Navigation() {
                   ))}
                 </div>
 
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
+                <div className=" lg:hidden">
+                  <Avatar
+                    className="text-white"
+                    onClick={handleUserClick}
+                    aria-aria-controls={open ? "basic-menu" : undefined}
+                    aria-aria-haspopup="true"
+                    aria-aria-expanded={open ? "true" : undefined}
+                    sx={{
+                      bgcolor: deepPurple[500],
+                      color: "white",
+                      cursor: "pointer",
+                    }}
+                  >
+                    R
+                  </Avatar>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={openUserMenu}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        setOpen(false);
+                        navigate("/account/order");
+                      }}
                     >
-                      Sign in
-                    </a>
-                  </div>
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Create account
-                    </a>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-200 px-4 py-6">
-                  <a href="#" className="-m-2 flex items-center p-2">
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-base font-medium text-gray-900">
-                      CAD
-                    </span>
-                    <span className="sr-only">, change currency</span>
-                  </a>
+                      My Orders
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
+                  </Menu>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
