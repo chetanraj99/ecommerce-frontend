@@ -6,7 +6,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Avatar, Menu, MenuItem } from "@mui/material";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import navigation from "./navigation";
 import { useNavigate } from "react-router-dom";
@@ -382,31 +382,48 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <Avatar
-                    className="text-white"
-                    onClick={handleUserClick}
-                    aria-aria-controls={open ? "basic-menu" : undefined}
-                    aria-aria-haspopup="true"
-                    aria-aria-expanded={open ? "true" : undefined}
-                    sx={{
-                      bgcolor: deepPurple[500],
-                      color: "white",
-                      cursor: "pointer",
-                    }}
-                  >
-                    R
-                  </Avatar>
-                  <Menu
-                    anchorEl={anchorEl}
-                    open={openUserMenu}
-                    onClose={handleCloseUserMenu}
-                  >
-                    <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-                    <MenuItem onClick={() => navigate("/account/order")}>
-                      My Orders
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
-                  </Menu>
+                  {true ? (
+                    <div>
+                      <Avatar
+                        className="text-white"
+                        onClick={handleUserClick}
+                        aria-aria-controls={open ? "basic-menu" : undefined}
+                        aria-aria-haspopup="true"
+                        aria-aria-expanded={open ? "true" : undefined}
+                        sx={{
+                          bgcolor: deepPurple[500],
+                          color: "white",
+                          cursor: "pointer",
+                        }}
+                      >
+                        R
+                      </Avatar>
+                      <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={openUserMenu}
+                        onClose={handleCloseUserMenu}
+                        MenuListProps={{ "aria-labelleadby": "bacic-button" }}
+                      >
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          Profile
+                        </MenuItem>
+                        <MenuItem onClick={() => navigate("/account/order")}>
+                          My Orders
+                        </MenuItem>
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          Logout
+                        </MenuItem>
+                      </Menu>
+                    </div>
+                  ) : (
+                    <Button
+                      onClick={handleOpen}
+                      className="text-sm font-medium text-gray-800 hover:text-gray-800"
+                    >
+                      Sign In
+                    </Button>
+                  )}
                 </div>
 
                 {/* Search */}
