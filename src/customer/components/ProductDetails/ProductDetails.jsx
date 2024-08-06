@@ -303,7 +303,7 @@ export default function ProductDetails() {
               <Grid item xs={5}>
                 <h1 className="text-xl font-semibold b-1">Product Ratings</h1>
                 <div className="flex items-center space-x-2">
-                  <Rating readonly value={4.5} precision={0.5} />
+                  <Rating readOnly value={4.5} precision={0.5} />
                   <p className="opacity-60"> 54890 Ratings</p>
                 </div>
                 <Box className="mt-5">
@@ -311,7 +311,7 @@ export default function ProductDetails() {
                     <Grid item xs={2}>
                       <p>Excellent</p>
                     </Grid>
-                    <Grid xs={7}>
+                    <Grid item xs={7}>
                       <LinearProgress
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
@@ -325,7 +325,7 @@ export default function ProductDetails() {
                     <Grid item xs={2}>
                       <p>Very Good</p>
                     </Grid>
-                    <Grid xs={7}>
+                    <Grid item xs={7}>
                       <LinearProgress
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
@@ -338,7 +338,7 @@ export default function ProductDetails() {
                     <Grid item xs={2}>
                       <p>Good</p>
                     </Grid>
-                    <Grid xs={7}>
+                    <Grid item xs={7}>
                       <LinearProgress
                         sx={{
                           bgcolor: "#d0d0d0",
@@ -354,7 +354,7 @@ export default function ProductDetails() {
                     <Grid item xs={2}>
                       <p>Average</p>
                     </Grid>
-                    <Grid xs={7}>
+                    <Grid item xs={7}>
                       <LinearProgress
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
@@ -367,7 +367,7 @@ export default function ProductDetails() {
                     <Grid item xs={2}>
                       <p>Poor</p>
                     </Grid>
-                    <Grid xs={7}>
+                    <Grid item xs={7}>
                       <LinearProgress
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"

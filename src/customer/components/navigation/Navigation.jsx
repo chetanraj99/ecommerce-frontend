@@ -10,6 +10,7 @@ import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import navigation from "./navigation";
 import { useNavigate } from "react-router-dom";
+import AuthModel from "../../auth/AuthModel";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -186,9 +187,9 @@ export default function Navigation() {
                   <Avatar
                     className="text-white"
                     onClick={handleUserClick}
-                    aria-aria-controls={open ? "basic-menu" : undefined}
-                    aria-aria-haspopup="true"
-                    aria-aria-expanded={open ? "true" : undefined}
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
                     sx={{
                       bgcolor: deepPurple[500],
                       color: "white",
@@ -197,6 +198,7 @@ export default function Navigation() {
                   >
                     R
                   </Avatar>
+
                   <Menu
                     anchorEl={anchorEl}
                     open={openUserMenu}
@@ -382,14 +384,14 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {true ? (
+                  {false ? (
                     <div>
                       <Avatar
                         className="text-white"
                         onClick={handleUserClick}
-                        aria-aria-controls={open ? "basic-menu" : undefined}
-                        aria-aria-haspopup="true"
-                        aria-aria-expanded={open ? "true" : undefined}
+                        aria-controls={open ? "basic-menu" : undefined} // Fix: Remove extra "aria-" prefix
+                        aria-haspopup="true" // Fix: Remove extra "aria-" prefix
+                        aria-expanded={open ? "true" : undefined} // Fix: Remove extra "aria-" prefix
                         sx={{
                           bgcolor: deepPurple[500],
                           color: "white",
@@ -398,6 +400,7 @@ export default function Navigation() {
                       >
                         R
                       </Avatar>
+
                       <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
@@ -455,6 +458,7 @@ export default function Navigation() {
           </div>
         </nav>
       </header>
+      <AuthModel handleClose={handleClose} open={openAuthModal} />
     </div>
   );
 }
