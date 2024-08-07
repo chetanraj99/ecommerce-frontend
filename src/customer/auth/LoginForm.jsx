@@ -7,6 +7,7 @@ import { useGlobalContext } from "../../context/ContextProvider";
 
 const LoginForm = ({ setLoginModal, loginModal, setRegisterModal }) => {
 	const { setIsLogged } = useGlobalContext();
+	const [loading, setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
 		email: `chetan@gmail.com`,
 		password: "chetan2345",
@@ -27,23 +28,25 @@ const LoginForm = ({ setLoginModal, loginModal, setRegisterModal }) => {
 		});
 	};
 	const handleLogin = async (e) => {
-		console.log("");
 		e.preventDefault();
+		setLoading(true);
 		const toastId = toast.loading("Logging in, please wait!");
 		try {
 			const { data } = await login(inputs);
 			localStorage.setItem("jwtToken", data.jwtToken);
 			console.log(data);
-			toast.remove(toastId);
+			toast.dismiss(toastId);
 			toast.success("Logging in, successful!");
 			setLoginModal(false);
 			setIsLogged(true);
+			setLoading(false);
 
 			console.log(data);
 		} catch (error) {
 			toast.dismiss(toastId);
 			console.log(error);
 			toast.error("Somthing went wrong.");
+			setLoading(false);
 		}
 	};
 	return (
@@ -85,7 +88,8 @@ const LoginForm = ({ setLoginModal, loginModal, setRegisterModal }) => {
 						</div>
 						<button
 							type="submit"
-							className="bg-purple-600 mt-5 py-2 rounded-md text-lg text-white text-center"
+							disabled={loading}
+							className="bg-purple-600 disabled:bg-purple-900 mt-5 py-2 rounded-md text-lg text-white text-center"
 						>
 							Login
 						</button>
