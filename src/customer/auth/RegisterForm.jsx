@@ -4,6 +4,7 @@ import { register } from "../../api/auth";
 import toast from "react-hot-toast";
 
 const RegisterForm = ({ setRegisterModal, registerModal, setLoginModal }) => {
+	const [loading, setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
 		firstName: "chetan",
 		lastName: "patel",
@@ -31,17 +32,20 @@ const RegisterForm = ({ setRegisterModal, registerModal, setLoginModal }) => {
 	const handleRegister = async (e) => {
 		e.preventDefault();
 		const toastId = toast.loading("Signing up, please wait!");
+		setLoading(true);
 		try {
 			await register(inputs);
-			toast.remove(toastId);
+			toast.dismiss(toastId);
 			toast.success("Sign up, successful!");
 			setRegisterModal(false);
 			setLoginModal(true);
+			setLoading(false);
 
 			// console.log(data);
 		} catch (error) {
 			toast.dismiss(toastId);
 			toast.error("Somthing went wrong.");
+			setLoading(false);
 		}
 	};
 	return (
@@ -115,8 +119,9 @@ const RegisterForm = ({ setRegisterModal, registerModal, setLoginModal }) => {
 							</div>
 						</div>
 						<button
+							disabled={loading}
 							type="submit"
-							className="bg-purple-600 mt-5 py-2 rounded-md text-lg text-white text-center"
+							className="bg-purple-600 disabled:bg-purple-900 mt-5 py-2 rounded-md text-lg text-white text-center"
 						>
 							Sign up
 						</button>
