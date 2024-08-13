@@ -12,34 +12,34 @@ import OrderDetails from "../customer/Order/OrderDetails.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 
 const CustomerRouters = () => {
-	return (
-		<div>
-			<div>
-				<Navigation />
-			</div>
-			<Routes>
-				<Route path="/" element={<HomePage />}></Route>
-				<Route path="/cart" element={<Cart />}></Route>
-				<Route
-					path="/:levelOne/:levelTwo/:levelThree"
-					element={<Product />}
-				></Route>
-				<Route path="/product/:productId" element={<ProductDetails />}></Route>
-				<Route path="/checkout" element={<Checkout />}></Route>
-				<Route
-					path="/account/order"
-					element={<PrivateRoute element={<Order />} />}
-				/>
-				<Route
-					path="/account/order/:orderId"
-					element={<PrivateRoute element={<OrderDetails />} />}
-				/>
-			</Routes>
-			<div>
-				<Footer />
-			</div>
-		</div>
-	);
+  return (
+    <div>
+      <div>
+        <Navigation />
+      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+        <Route
+          path="/:levelOne/:levelTwo/:levelThree"
+          element={<Product />}
+        ></Route>
+        <Route path="/product/:productId" element={<ProductDetails />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route
+          path="/account/order"
+          element={<PrivateRoute element={<Order />} />}
+        />
+        <Route
+          path="/account/order/:orderId"
+          element={<PrivateRoute element={<OrderDetails />} />}
+        />
+      </Routes>
+      <div>
+        <Footer />
+      </div>
+    </div>
+  );
 };
 
 export default CustomerRouters;
