@@ -50,12 +50,12 @@ export default function Product() {
   const sortValue = searchParamms.get("sort");
   const pageNumber = searchParamms.get("page") || 1;
   const stock = searchParamms.get("stock");
-  console.log(pageNumber + "hiiiiiiiiiii");
-  const handlePaginationChange = (value) => {
+
+  const handlePaginationChange = (event, value) => {
     const searchParamms = new URLSearchParams(location.search);
     searchParamms.set("page", value);
     const query = searchParamms.toString();
-    navigate({ search: `${query}` });
+    navigate({ search: `?${query}` });
   };
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -99,7 +99,7 @@ export default function Product() {
       minDiscount: disccount || 0,
       sort: sortValue || "price_low",
       pageNumber: pageNumber - 1,
-      pageSize: 1,
+      pageSize: 4,
       stock: stock,
     };
     dispatch(findProducts(data));

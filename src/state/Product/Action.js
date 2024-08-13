@@ -36,7 +36,8 @@ export const findProductsById = (reqData) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
   const { productId } = reqData;
   try {
-    const { data } = api.get(`/api/products/id/${productId}`);
+    const { data } = await api.get(`/api/products/id/${productId}`);
+    console.log("----", data);
     dispatch({ tpye: FIND_PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: FIND_PRODUCTS_FAILURE, payload: error.message });
