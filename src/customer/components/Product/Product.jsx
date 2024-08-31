@@ -18,7 +18,7 @@ import {
   FormLabel,
   Pagination,
   Radio,
-  RadioGroup,
+  RadioGroup, 
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,8 +39,8 @@ export default function Product() {
   const navigate = useNavigate();
   const param = useParams();
   const dispatch = useDispatch();
-  const { product } = useSelector((store) => store);
-  console.log(product.products);
+  const { products } = useSelector((store) => store);
+  console.log(products.products);
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParamms = new URLSearchParams(decodedQueryString);
   const colorValue = searchParamms.get("color");
@@ -435,8 +435,8 @@ export default function Product() {
               {/* Product grid */}
               <div className="lg:col-span-4 w-full">
                 <div className="flex flex-wrap justify-center bg-white py-5">
-                  {product.products &&
-                    product.products?.content?.map((item) => (
+                  {products.products &&
+                    products.products?.content?.map((item) => (
                       <ProductCard key={item.imageUrl} product={item} />
                     ))}
                 </div>
@@ -447,7 +447,7 @@ export default function Product() {
           <section className="w-full px=[3.6rem]">
             <div className="px-4 py-5 flex justify-center">
               <Pagination
-                count={product.products?.totalPages}
+                count={products.products?.totalPages}
                 color="secondary"
                 onChange={handlePaginationChange}
               />

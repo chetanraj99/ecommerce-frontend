@@ -6,7 +6,7 @@ import ProductReviewCard from "./ProductReviewCard";
 import { mens_kurta } from "../../Data/mens_kurta";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { findProductsById } from "../../../state/Product/Action";
 
 const product = {
@@ -64,18 +64,21 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  // const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
   const params = useParams();
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const handleAddToCart = () => navigate("/cart");
+  const { products } = useSelector((store) => store);
+console.log(products);
+
 
   useEffect(() => {
     const data = { productId: params.productId };
     dispatch(findProductsById(data));
   }, [params.productId]);
+  
 
   return (
     <div className="bg-white">
@@ -122,8 +125,8 @@ export default function ProductDetails() {
           {/* Image gallery */}
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-              <img
-                src={product.images[0].src}
+            a        <img
+                src={products.product?.imageUrl}   //why not getting image
                 alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -145,10 +148,10 @@ export default function ProductDetails() {
             <div className="lg:col-span-2 ">
               <h1 className="text-2xl lg:text-xl font-semibold text-gray-900">
                 {/* {product.name} */}
-                Univeraloutfit
+                {products.proudct?.brand}
               </h1>
               <h1 className="text-2xl lg:text-xl text-gray-900 opacity-60">
-                Hand cut and sewn locally Dyed with our proprietary colors
+              {products.proudct?.title}
               </h1>
             </div>
 
@@ -157,9 +160,9 @@ export default function ProductDetails() {
               <h2 className="sr-only">Product information</h2>
 
               <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">₹199 </p>
-                <p className="opacity-50 lign-through">₹211</p>
-                <p className="text-green-600 font-semibold">5% off</p>
+                <p className="font-semibold">₹{products.proudct?.discountedPrice} </p>
+                <p className="opacity-50 lign-through">₹{products.proudct?.price}</p>
+                <p className="text-green-600 font-semibold">{products.proudct?.discountPercent}% off</p>
               </div>
 
               {/* Reviews */}

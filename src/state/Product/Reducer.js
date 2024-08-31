@@ -12,9 +12,12 @@ const initialState = {
   product: null,
   loading: false,
   error: null,
+
 };
 
+
 export const customerProductReducer = (state = initialState, action) => {
+ 
   switch (action.type) {
     case FIND_PRODUCTS_REQUEST:
     case FIND_PRODUCT_BY_ID_REQUEST:
@@ -33,7 +36,7 @@ export const customerProductReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        products: action.payload,
+        product: action.payload,
       };
 
     case FIND_PRODUCTS_FAILURE:

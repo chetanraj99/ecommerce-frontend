@@ -1,6 +1,8 @@
 import { api } from "../../api/auth";
 import {
   FIND_PRODUCT_BY_ID_REQUEST,
+  FIND_PRODUCT_BY_ID_SUCCESS, // Correct action type
+  FIND_PRODUCT_BY_ID_FAILURE,
   FIND_PRODUCTS_FAILURE,
   FIND_PRODUCTS_REQUEST,
   FIND_PRODUCTS_SUCCESS,
@@ -38,8 +40,9 @@ export const findProductsById = (reqData) => async (dispatch) => {
   try {
     const { data } = await api.get(`/api/products/id/${productId}`);
     console.log("----", data);
-    dispatch({ tpye: FIND_PRODUCTS_SUCCESS, payload: data });
+    dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: FIND_PRODUCTS_FAILURE, payload: error.message });
+    dispatch({ type: FIND_PRODUCT_BY_ID_FAILURE, payload: error.message });
   }
 };
+
