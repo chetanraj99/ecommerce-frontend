@@ -10,6 +10,7 @@ import Checkout from "../customer/components/Checkout/Checkout.jsx";
 import Order from "../customer/Order/Order.jsx";
 import OrderDetails from "../customer/Order/OrderDetails.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import PaymentSuccess from "../customer/components/Payment/PaymentSuccess.jsx";
 
 const CustomerRouters = () => {
   return (
@@ -34,7 +35,12 @@ const CustomerRouters = () => {
           path="/account/order/:orderId"
           element={<PrivateRoute element={<OrderDetails />} />}
         />
+        <Route
+          path="/payment/:orderId"
+          element={<PrivateRoute element={<PaymentSuccess />} />}
+        />
       </Routes>
+      
       <div>
         <Footer />
       </div>

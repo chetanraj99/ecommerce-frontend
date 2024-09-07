@@ -45,4 +45,3 @@ export const findProductsById = (reqData) => async (dispatch) => {
     dispatch({ type: FIND_PRODUCT_BY_ID_FAILURE, payload: error.message });
   }
 };
-

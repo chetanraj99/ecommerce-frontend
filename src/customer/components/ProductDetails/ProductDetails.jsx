@@ -8,6 +8,7 @@ import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findProductsById } from "../../../state/Product/Action";
+import { addItemToCart } from "../../../state/Cart/Action";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -69,9 +70,15 @@ export default function ProductDetails() {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleAddToCart = () => navigate("/cart");
   const { products } = useSelector((store) => store);
 console.log(products);
+
+const handleAddToCart=()=>{
+const data={productId:params.productId, size: selectedSize.name}
+console.log("data _", data)
+dispatch(addItemToCart(data))
+navigate("/cart")}
+
 
 
   useEffect(() => {
@@ -125,8 +132,8 @@ console.log(products);
           {/* Image gallery */}
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-            a        <img
-                src={products.product?.imageUrl}   //why not getting image
+                    <img
+                src={products.product?.imageUrl}   
                 alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -148,10 +155,10 @@ console.log(products);
             <div className="lg:col-span-2 ">
               <h1 className="text-2xl lg:text-xl font-semibold text-gray-900">
                 {/* {product.name} */}
-                {products.proudct?.brand}
+                {products.product?.brand}
               </h1>
               <h1 className="text-2xl lg:text-xl text-gray-900 opacity-60">
-              {products.proudct?.title}
+              {products.product?.title}
               </h1>
             </div>
 
@@ -160,9 +167,9 @@ console.log(products);
               <h2 className="sr-only">Product information</h2>
 
               <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">₹{products.proudct?.discountedPrice} </p>
-                <p className="opacity-50 lign-through">₹{products.proudct?.price}</p>
-                <p className="text-green-600 font-semibold">{products.proudct?.discountPercent}% off</p>
+                <p className="font-semibold">₹{products.product?.price} </p>
+                <p className="opacity-50 lign-through">₹{products.product?.discountedPrice}</p>
+                <p className="text-green-600 font-semibold">{products.product?.discountPercent}% off</p>
               </div>
 
               {/* Reviews */}

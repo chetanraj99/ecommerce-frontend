@@ -27,7 +27,7 @@ export default navigation = {
           name: "Clothing",
           items: [
             { name: "Tops", href: "#" },
-            { name: "Dresses", href: "#" },
+            { name: "mens_kurta", href: "#" },
             { name: "Pants", href: "#" },
             { name: "Denim", href: "#" },
             { name: "Sweaters", href: "#" },

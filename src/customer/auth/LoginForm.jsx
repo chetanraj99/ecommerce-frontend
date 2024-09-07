@@ -9,8 +9,8 @@ const LoginForm = ({ setLoginModal, loginModal, setRegisterModal }) => {
 	const { setIsLogged } = useGlobalContext();
 	const [loading, setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
-		email: `chetan@gmail.com`,
-		password: "chetan2345",
+		email: `chetan@123`,
+		password: "1234",
 	});
 	const modalRef = useRef();
 	const handleOutSideCloseModal = (e) => {
