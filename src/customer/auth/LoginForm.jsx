@@ -1,7 +1,6 @@
 import { CgClose } from "react-icons/cg";
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { login, register } from "../../api/auth";
+import { login } from "../../api/auth";
 import toast from "react-hot-toast";
 import { useGlobalContext } from "../../context/ContextProvider";
 
@@ -9,8 +8,8 @@ const LoginForm = ({ setLoginModal, loginModal, setRegisterModal }) => {
 	const { setIsLogged } = useGlobalContext();
 	const [loading, setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
-		email: `chetan@gmail.com`,
-		password: "chetan2345",
+		email: "",
+		password: "",
 	});
 	const modalRef = useRef();
 	const handleOutSideCloseModal = (e) => {
@@ -33,13 +32,14 @@ const LoginForm = ({ setLoginModal, loginModal, setRegisterModal }) => {
 		const toastId = toast.loading("Logging in, please wait!");
 		try {
 			const { data } = await login(inputs);
-			localStorage.setItem("jwtToken", data.jwtToken);
 			console.log(data);
+			localStorage.setItem("jwtToken", data.jwtToken);
 			toast.dismiss(toastId);
 			toast.success("Logging in, successful!");
 			setLoginModal(false);
 			setIsLogged(true);
 			setLoading(false);
+			setInputs({ email: "", password: "" });
 
 			console.log(data);
 		} catch (error) {

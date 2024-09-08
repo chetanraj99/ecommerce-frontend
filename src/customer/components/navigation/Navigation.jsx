@@ -48,7 +48,7 @@ export default function Navigation() {
 	return (
 		<>
 			<Toaster />
-			<div className="bg-white z-[200] sticky">
+			<div className="z-[200] stick bg-white">
 				{/* Mobile menu */}
 				<Transition.Root show={open} as={Fragment}>
 					<Dialog
@@ -231,9 +231,6 @@ export default function Navigation() {
 					</Dialog>
 				</Transition.Root>
 				<header className="relative bg-white">
-					<p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-						Get free delivery on orders over $100
-					</p>
 					<nav aria-label="Top" className="mx-auto">
 						<div className="border-b border-gray-200">
 							<div className="flex h-16 items-center">

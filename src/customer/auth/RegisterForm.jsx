@@ -6,12 +6,12 @@ import toast from "react-hot-toast";
 const RegisterForm = ({ setRegisterModal, registerModal, setLoginModal }) => {
 	const [loading, setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
-		firstName: "chetan",
-		lastName: "patel",
-		email: `chetan${Math.floor(Math.random() * 100)}@gmail.com`,
-		password: "chetan2345",
-		role: "user",
-		mobile: "9183883838",
+		firstName: "",
+		lastName: "",
+		email: "",
+		password: "",
+		role: "",
+		mobile: "",
 	});
 
 	const modalRef = useRef();
@@ -29,6 +29,7 @@ const RegisterForm = ({ setRegisterModal, registerModal, setLoginModal }) => {
 			return { ...preState, [e.target.name]: e.target.value };
 		});
 	};
+
 	const handleRegister = async (e) => {
 		e.preventDefault();
 		const toastId = toast.loading("Signing up, please wait!");
@@ -40,6 +41,14 @@ const RegisterForm = ({ setRegisterModal, registerModal, setLoginModal }) => {
 			setRegisterModal(false);
 			setLoginModal(true);
 			setLoading(false);
+			setInputs({
+				firstName: "",
+				lastName: "",
+				email: "",
+				password: "",
+				role: "",
+				mobile: "",
+			});
 
 			// console.log(data);
 		} catch (error) {
