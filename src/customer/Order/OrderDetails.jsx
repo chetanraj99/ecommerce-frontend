@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import AddressCard from "../components/AddressCard/AddressCard";
 import OrderTracker from "./OrderTracker";
 import { Box, Grid } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useGlobalContext } from "../../context/ContextProvider";
 
 const OrderDetails = () => {
+  const {isLogged}=useGlobalContext();
+  console.log(isLogged);
   return (
     <div className="px:5 lg:px-20">
       <div>

@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddressCard from "../AddressCard/AddressCard";
 import { Button } from "@mui/material";
 import CartItem from "../Cart/CartItem";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { getOrderById } from "../../../state/Order/Action";
+import { createPayment } from "../../../state/Payment/Action";
 
 const OrderSummay = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { order } = useSelector((store) => store);
+  const searchParams = new URLSearchParams(location.search);
+  const orderId = searchParams.get("order_id");
+
+  useEffect(() => {
+    dispatch(getOrderById(orderId));
+  }, [orderId]);
+
+  const handleCheckout = () => {
+    dispatch(createPayment(orderId));
+  };
+
   return (
     <div>
       <div className="p-5 shadow-lg rounded-s-md border">
-        <AddressCard />
+        <AddressCard address={order.order?.shippingAddress} />
       </div>
       <div>
         <div className="lg:grid grid-cols-3 lg:px-16 ">
           <div className="col-span-2">
-            {[1, 1, 1].map((item) => (
-              <CartItem />
+            {order.order?.orderItems.map((item) => (
+              <CartItem item={item} />
             ))}
           </div>
           <div className="px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0">
@@ -26,12 +44,14 @@ const OrderSummay = () => {
                 <div className="flex justify-between pt-3 text-black">
                   <span>Price</span>
 
-                  <span>₹4697</span>
+                  <span>₹{order.order?.totalPrice}</span>
                 </div>
 
                 <div className="flex justify-between pt-3 ">
                   <span>Discount</span>
-                  <span className="text-green-600">-₹3419</span>
+                  <span className="text-green-600">
+                    -₹{order.order?.discount}
+                  </span>
                 </div>
 
                 <div className="flex justify-between pt-3 ">
@@ -41,13 +61,16 @@ const OrderSummay = () => {
 
                 <div className="flex justify-between pt-3 ">
                   <span>Total Amount</span>
-                  <span className="text-green-600 font-bold">₹1278</span>
+                  <span className="text-green-600 font-bold">
+                    ₹{order.order?.totalDiscountedPrice}
+                  </span>
                 </div>
               </div>
               <Button
                 className="w-full mt-5"
                 variant="contained"
                 sx={{ px: "2.5rem", py: ".7rem", bgcolor: "#9155fd" }}
+                onClick={handleCheckout}
               >
                 Checkout
               </Button>
